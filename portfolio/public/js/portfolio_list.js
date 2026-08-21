@@ -70,7 +70,16 @@ function export_portfolios(selected, format, layout, include_sensitive) {
         },
         callback: function(r) {
             if (r.message.status === 'success') {
-                window.open(r.message.file_url, '_blank');
+                let file_url = r.message.file_url;
+                let popup = window.open(file_url, '_blank');
+                if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                    // Popup blocked by the browser: show a clickable link instead.
+                    frappe.msgprint({
+                        title: __('Export Ready'),
+                        indicator: 'green',
+                        message: `${__('Portfolio exported successfully.')} <a href="${file_url}" target="_blank">${__('Click here to download')}</a>`
+                    });
+                }
             } else {
                 frappe.msgprint(__('Failed to export portfolio' + r.message.message));
             }

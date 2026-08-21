@@ -143,7 +143,7 @@ def generate_kartoza_html_content(portfolios):
 
         project_details += f"""
         <div style="page-break-after:always">
-            <div style="height:100%; position:relative">
+            <div style="position:relative">
                 <h3 style="color:#f4b340; text-align:center;">Kartoza Project Sheet</h3>
                 <h2 style="text-align:center;">{portfolio.title}</h2>
                 <div>
